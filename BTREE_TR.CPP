@@ -1,0 +1,64 @@
+#include <conio.h>
+#include <iostream.h>
+#include <stdlib.h>
+struct node
+{
+     int data;
+     struct node* left;
+     struct node* right;
+};
+
+struct node* newNode(int data)
+{
+     struct node* node = (struct node*)malloc(sizeof(struct node));
+     node->data = data;
+     node->left = NULL;
+     node->right = NULL;
+     return(node);
+}
+void printPostorder(struct node* node)
+{
+     if (node == NULL)
+     {
+	  return;
+     }
+     printPostorder(node->left);
+     printPostorder(node->right);
+     cout<<node->data;
+}
+void printInorder(struct node* node)
+{
+     if (node == NULL)
+     {
+	  return;
+     }
+     printInorder(node->left);
+     cout<<node->data;
+     printInorder(node->right);
+}
+void printPreorder(struct node* node)
+{
+     if (node == NULL)
+     {
+	  return;
+     }
+     cout<<node->data;
+     printPreorder(node->left);
+     printPreorder(node->right);
+}
+void main()
+{
+     clrscr();
+     struct node *root  = newNode(1);
+     root->left             = newNode(2);
+     root->right           = newNode(3);
+     root->left->left     = newNode(4);
+     root->left->right   = newNode(5);
+     cout<<"\nPreorder traversal of binary tree is \n";
+     printPreorder(root);
+     cout<<"\nInorder traversal of binary tree is \n";
+     printInorder(root);
+     cout<<"\nPostorder traversal of binary tree is \n";
+     printPostorder(root);
+     getch();
+}
