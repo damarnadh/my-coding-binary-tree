@@ -13,24 +13,23 @@ struct Node *newNode(int item)
      temp->left = temp->right = NULL;
      return temp;
 }
-void rightViewUtil(struct Node *root, int level, int *max_level)
+void rightView(struct Node *root )
 {
      if (root==NULL)
      {
 	  return;
      }
-     if ( *max_level < level)
+     else if ( root->right!=NULL)
      {
 	  cout<<"\n"<<root->data;
-	 *max_level = level;
+	  rightView(root->right);
      }
-     rightViewUtil(root->right, level+1, max_level);
-     rightViewUtil(root->left, level+1, max_level);
-}
-void rightView(struct Node *root)
-{
-     int max_level = 0;
-     rightViewUtil(root, 1, &max_level);
+     else
+     {
+	     
+	  cout<<"\n"<<root->data;
+	  rightView(root->left);
+     }	     
 }
 int main()
 {
